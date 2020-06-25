@@ -680,14 +680,14 @@ export default class DataManager {
 
   treefyData() {
     this.sorted = this.paged = false;
-    this.data.forEach(a => a.tableData.childRows = null);
+    this.filteredData.forEach(a => a.tableData.childRows = null);
     this.treefiedData = [];
     this.treefiedDataLength = 0;
     this.treeDataMaxLevel = 0;
 
     // if filter or search is enabled, collapse the tree
     if (this.searchText || this.columns.some(columnDef => columnDef.tableData.filterValue)) {
-      this.data.forEach(row => {
+      this.filteredData.forEach(row => {
         row.tableData.isTreeExpanded = false;
       });
 
@@ -697,7 +697,7 @@ export default class DataManager {
 
     const addRow = (rowData) => {
       rowData.tableData.markedForTreeRemove = false;
-      let parent = this.parentFunc(rowData, this.data);
+      let parent = this.parentFunc(rowData, this.filteredData);
       if (parent) {
         parent.tableData.childRows = parent.tableData.childRows || [];
         if (!parent.tableData.childRows.includes(rowData)) {
@@ -721,7 +721,7 @@ export default class DataManager {
     };
 
     // Add all rows initially
-    this.data.forEach(rowData => {
+    this.filteredData.forEach(rowData => {
       addRow(rowData);
     });
     const markForTreeRemove = (rowData) => {
