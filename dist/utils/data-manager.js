@@ -756,7 +756,7 @@ var DataManager = /*#__PURE__*/function () {
       var _this6 = this;
 
       this.sorted = this.paged = false;
-      this.filteredData.forEach(function (a) {
+      this.data.forEach(function (a) {
         return a.tableData.childRows = null;
       });
       this.treefiedData = [];
@@ -766,7 +766,7 @@ var DataManager = /*#__PURE__*/function () {
       if (this.searchText || this.columns.some(function (columnDef) {
         return columnDef.tableData.filterValue;
       })) {
-        this.filteredData.forEach(function (row) {
+        this.data.forEach(function (row) {
           row.tableData.isTreeExpanded = false;
         }); // expand the tree for all nodes present after filtering and searching
 
@@ -776,7 +776,7 @@ var DataManager = /*#__PURE__*/function () {
       var addRow = function addRow(rowData) {
         rowData.tableData.markedForTreeRemove = false;
 
-        var parent = _this6.parentFunc(rowData, _this6.filteredData);
+        var parent = _this6.parentFunc(rowData, _this6.data);
 
         if (parent) {
           parent.tableData.childRows = parent.tableData.childRows || [];
@@ -804,7 +804,7 @@ var DataManager = /*#__PURE__*/function () {
       }; // Add all rows initially
 
 
-      this.filteredData.forEach(function (rowData) {
+      this.data.forEach(function (rowData) {
         addRow(rowData);
       });
 
