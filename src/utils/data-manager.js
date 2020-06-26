@@ -701,8 +701,11 @@ export default class DataManager {
       if (parent) {
         parent.tableData.childRows = parent.tableData.childRows || [];
         if (!parent.tableData.childRows.includes(rowData)) {
-          parent.tableData.childRows.push(rowData);
-          this.treefiedDataLength++;
+          //valid if there is a filter applied
+          if(this.filteredData.some(filteredValue => filteredValue.id === rowData.id)){
+            parent.tableData.childRows.push(rowData);
+            this.treefiedDataLength++;
+          }
         }
 
         addRow(parent);

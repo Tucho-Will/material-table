@@ -782,8 +782,13 @@ var DataManager = /*#__PURE__*/function () {
           parent.tableData.childRows = parent.tableData.childRows || [];
 
           if (!parent.tableData.childRows.includes(rowData)) {
-            parent.tableData.childRows.push(rowData);
-            _this6.treefiedDataLength++;
+            //valid if there is a filter applied
+            if (_this6.filteredData.some(function (filteredValue) {
+              return filteredValue.id === rowData.id;
+            })) {
+              parent.tableData.childRows.push(rowData);
+              _this6.treefiedDataLength++;
+            }
           }
 
           addRow(parent);
