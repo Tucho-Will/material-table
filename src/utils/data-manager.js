@@ -724,15 +724,17 @@ export default class DataManager {
     this.data.forEach(rowData => {
       addRow(rowData);
     });
+
+    //not necessary to go through the entire tree, if I want to change the record that I passed through the parameter
     const markForTreeRemove = (rowData) => {
-      let pointer = this.treefiedData;
-      rowData.tableData.path.forEach(pathPart => {
-        if (pointer.tableData && pointer.tableData.childRows) {
-          pointer = pointer.tableData.childRows;
-        }
-        pointer = pointer[pathPart];
-      });
-      pointer.tableData.markedForTreeRemove = true;
+      // let pointer = this.treefiedData;
+      // rowData.tableData.path.forEach(pathPart => {
+      //   if (pointer.tableData && pointer.tableData.childRows) {
+      //     pointer = pointer.tableData.childRows;
+      //   }
+      //   pointer = pointer[pathPart];
+      // });
+      rowData.tableData.markedForTreeRemove = true;
     };
 
     const traverseChildrenAndUnmark = (rowData) => {
