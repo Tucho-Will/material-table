@@ -261,13 +261,13 @@ var MaterialTable = /*#__PURE__*/function (_React$Component) {
       }
     });
     (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this), "onEditingCanceled", function (mode, rowData) {
-      if (mode === "add") {
+      if (_this.props.editable && mode === "add") {
         _this.props.editable.onRowAddCancelled && _this.props.editable.onRowAddCancelled();
 
         _this.setState({
           showAddRow: false
         });
-      } else if (mode === "update") {
+      } else if (_this.props.editable && mode === "update") {
         _this.props.editable.onRowUpdateCancelled && _this.props.editable.onRowUpdateCancelled();
 
         _this.dataManager.changeRowEditing(rowData);
